@@ -2,36 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kerala Official Ticket Booking Portal</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             margin: 0;
-            padding: 15px;
+            padding: 10px;
             color: #1e293b;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
             position: relative;
         }
         /* Top Right Offer Button */
         .top-offer-btn {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 10px;
+            right: 10px;
             background: #1e3a8a;
             color: #ffffff;
             border: 2px solid #60a5fa;
-            padding: 8px 14px;
-            font-size: 13px;
+            padding: 6px 12px;
+            font-size: 11px;
             font-weight: bold;
             border-radius: 20px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: 0.2s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
             z-index: 10;
         }
         .top-offer-btn:hover {
@@ -42,48 +45,95 @@
             background: #ffffff;
             color: #1e293b;
             width: 100%;
-            max-width: 500px;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            max-width: 440px;
+            padding: 15px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            max-height: 98vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         /* Header & Logo */
         .header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
         .logo-icon {
-            font-size: 40px;
-            margin-bottom: 5px;
+            font-size: 32px;
+            margin-bottom: 2px;
         }
         .header h2 {
             color: #1d4ed8;
             margin: 0;
-            font-size: 20px;
+            font-size: 17px;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 800;
         }
-        .datetime {
-            font-size: 12px;
-            color: #0284c7;
-            margin-top: 5px;
-            font-weight: 700;
+        
+        /* Scrolling Ticker for Draw Times */
+        .ticker-container {
+            background: #e0f2fe;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            border-radius: 6px;
+            padding: 4px 0;
+            margin: 4px 0;
+            border: 1px solid #bae6fd;
         }
+        .ticker-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 12s linear infinite;
+            font-size: 12px;
+            font-weight: bold;
+            color: #0369a1;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Live Blinking Indicator & Date */
+        .live-status-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #0284c7;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .blink-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #dc2626;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
         /* Ticket Type Selection */
         .ticket-type-selector {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 8px;
         }
         .type-card {
             flex: 1;
             border: 2px solid #bae6fd;
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 6px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
             background: #f0f9ff;
         }
         .type-card.active {
@@ -91,44 +141,45 @@
             background: #e0f2fe;
         }
         .type-card h4 {
-            margin: 0 0 3px 0;
+            margin: 0 0 2px 0;
             color: #0369a1;
-            font-size: 14px;
+            font-size: 13px;
         }
         .type-card .price {
             color: #dc2626;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 13px;
         }
+
         /* Main Featured Ticket Box */
         .ticket {
             background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
             color: white;
-            border-radius: 12px;
-            padding: 15px;
-            position: relative;
-            box-shadow: 0 6px 15px rgba(30, 58, 138, 0.3);
-            margin-bottom: 15px;
+            border-radius: 10px;
+            padding: 10px;
             text-align: center;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
         }
         .ticket-number {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: bold;
             letter-spacing: 1px;
             background: rgba(255, 255, 255, 0.2);
-            padding: 8px;
-            border-radius: 8px;
+            padding: 6px;
+            border-radius: 6px;
             display: inline-block;
             border: 1px dashed rgba(255, 255, 255, 0.6);
-            margin: 8px 0;
+            margin: 4px 0;
             word-break: break-all;
         }
+
         /* 100 Tickets Grid Section */
         .grid-section-title {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             color: #0369a1;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -136,60 +187,51 @@
         .ticket-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            max-height: 160px;
+            gap: 4px;
+            max-height: 120px;
             overflow-y: auto;
             background: #f0f9ff;
-            padding: 8px;
-            border-radius: 8px;
+            padding: 6px;
+            border-radius: 6px;
             border: 1px solid #bae6fd;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
         .grid-item {
             background: #ffffff;
             border: 1px solid #7dd3fc;
-            padding: 6px 4px;
+            padding: 5px 2px;
             text-align: center;
             font-size: 11px;
             font-weight: bold;
             color: #0284c7;
             border-radius: 4px;
             cursor: pointer;
-            transition: 0.2s;
-        }
-        .grid-item:hover {
-            background: #e0f2fe;
         }
         .grid-item.selected {
             background: #0284c7;
             color: white;
             border-color: #0369a1;
         }
+
         /* Buttons */
         .btn {
             background-color: #f59e0b;
             color: white;
             border: none;
-            padding: 10px;
-            font-size: 15px;
-            border-radius: 8px;
+            padding: 8px;
+            font-size: 13px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: bold;
-            transition: background 0.2s;
-        }
-        .btn:hover {
-            background-color: #d97706;
         }
         .whatsapp-btn {
             background-color: #10b981;
-        }
-        .whatsapp-btn:hover {
-            background-color: #059669;
+            margin-bottom: 0;
         }
 
-        /* Popup Modal Styling (Blue & Dark Theme) */
+        /* Popup Modal */
         .modal {
             display: none;
             position: fixed;
@@ -206,10 +248,9 @@
             background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
             color: #f8fafc;
             width: 90%;
-            max-width: 420px;
-            padding: 20px;
-            border-radius: 14px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            max-width: 400px;
+            padding: 15px;
+            border-radius: 12px;
             max-height: 85vh;
             overflow-y: auto;
             position: relative;
@@ -217,36 +258,25 @@
         }
         .close-btn {
             position: absolute;
-            top: 10px;
-            right: 15px;
+            top: 8px;
+            right: 12px;
             color: #93c5fd;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             cursor: pointer;
         }
-        .close-btn:hover {
-            color: #ffffff;
-        }
-        .modal-content h3 {
-            color: #60a5fa;
-            text-align: center;
-            margin-top: 0;
-            font-size: 18px;
-        }
         .prize-table {
             width: 100%;
-            margin-top: 10px;
-            font-size: 13px;
+            margin-top: 8px;
+            font-size: 12px;
             border-collapse: collapse;
         }
         .prize-table th, .prize-table td {
-            padding: 6px 8px;
+            padding: 4px 6px;
             border-bottom: 1px solid rgba(255,255,255,0.15);
             text-align: left;
         }
-        .prize-table th {
-            color: #93c5fd;
-        }
+        .prize-table th { color: #93c5fd; }
     </style>
 </head>
 <body>
@@ -259,7 +289,17 @@
         <div class="header">
             <div class="logo-icon">🎟️</div>
             <h2>Welcome to Kerala Lottery Tickets</h2>
-            <div class="datetime" id="liveDateTime">Loading Date & Time...</div>
+            
+            <!-- Scrolling Ticker for Draw Times -->
+            <div class="ticker-container">
+                <div class="ticker-text">⚡ 1st Draw Time: 03:00 PM  &nbsp;|&nbsp;  2nd Draw Time: 08:00 PM  &nbsp;|&nbsp;  Book Your Lucky Ticket Now! ⚡</div>
+            </div>
+
+            <!-- Live Blinking Indicator & Date -->
+            <div class="live-status-bar">
+                <span class="blink-dot"></span>
+                <span id="liveDateTime">Loading...</span>
+            </div>
         </div>
 
         <!-- Ticket Category Cards -->
@@ -276,18 +316,18 @@
 
         <!-- Featured Selected Ticket Box -->
         <div class="ticket">
-            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;" id="selectedCategoryTitle">NORMAL TICKET (Rs/49)</div>
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;" id="selectedCategoryTitle">NORMAL TICKET (Rs/49)</div>
             <div class="ticket-number" id="ticketDisplay">No ticket selected</div>
-            <div style="font-size: 11px; opacity: 0.9;" id="selectionCount">Selected: 0 tickets</div>
+            <div style="font-size: 10px; opacity: 0.9;" id="selectionCount">Selected: 0 tickets</div>
         </div>
 
         <!-- 100 Tickets Grid View -->
         <div class="grid-section-title">
             <span>Available Active Tickets (100)</span>
-            <span style="font-size: 11px; color: #0284c7;">Tap multiple to select</span>
+            <span style="font-size: 10px; color: #0284c7;">Tap multiple to select</span>
         </div>
         <div class="ticket-grid" id="ticketGridContainer">
-            <!-- Dynamic 100 tickets will load here -->
+            <!-- Dynamic 100 tickets -->
         </div>
 
         <!-- Action Buttons -->
@@ -299,11 +339,11 @@
     <div class="modal" id="offerModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h3>✨ Mega Bumper DHAMAKA OFFER ✨</h3>
-            <p style="text-align: center; color: #93c5fd; font-size: 14px; margin-bottom: 5px; font-weight: bold;">Dear Kerala Lottery Customer,</p>
-            <p style="text-align: center; color: #fbbf24; font-size: 15px; font-weight: bold; margin: 5px 0;">Golden chance to win ₹25 CRORE 💰</p>
+            <h3 style="color: #60a5fa; text-align: center; margin-top: 0; font-size: 16px;">✨ Mega Bumper DHAMAKA OFFER ✨</h3>
+            <p style="text-align: center; color: #93c5fd; font-size: 13px; margin-bottom: 4px; font-weight: bold;">Dear Kerala Lottery Customer,</p>
+            <p style="text-align: center; color: #fbbf24; font-size: 14px; font-weight: bold; margin: 4px 0;">Golden chance to win ₹25 CRORE 💰</p>
             
-            <div style="background: rgba(255,255,255,0.08); padding: 10px; border-radius: 8px; margin: 10px 0; font-size: 13px;">
+            <div style="background: rgba(255,255,255,0.08); padding: 8px; border-radius: 6px; margin: 8px 0; font-size: 12px;">
                 <strong>🚀 Kerala Jackpot Booking Available!</strong><br>
                 • 1 Ticket Price:- ₹149/-<br>
                 • 2 Ticket Price:- ₹298/-<br>
@@ -312,7 +352,7 @@
                 • 10 Ticket Price:- ₹1299/-
             </div>
 
-            <h4 style="color: #60a5fa; margin-bottom: 5px; text-align: center;">🏆 WINNING PRIZES 🏆</h4>
+            <h4 style="color: #60a5fa; margin-bottom: 4px; text-align: center; font-size: 13px;">🏆 WINNING PRIZES 🏆</h4>
             <table class="prize-table">
                 <tr><th>Rank</th><th>Prize</th><th>Winners</th></tr>
                 <tr><td>1st Prize</td><td>₹25 Crore</td><td>1 Person</td></tr>
@@ -326,7 +366,7 @@
                 <tr><td>9th Prize</td><td>₹10,000</td><td>179 Persons</td></tr>
             </table>
 
-            <div style="text-align: center; margin-top: 15px; font-size: 13px; color: #34d399; font-weight: bold;">
+            <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #34d399; font-weight: bold;">
                 Helpline Number: 7061373557
             </div>
         </div>
@@ -337,15 +377,9 @@
         let currentPrice = 49;
         let selectedTickets = [];
 
-        // Modal Functions
-        function openModal() {
-            document.getElementById('offerModal').style.display = 'flex';
-        }
-        function closeModal() {
-            document.getElementById('offerModal').style.display = 'none';
-        }
+        function openModal() { document.getElementById('offerModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('offerModal').style.display = 'none'; }
 
-        // Real-time Date & Time Function
         function updateDateTime() {
             const now = new Date();
             const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -371,7 +405,6 @@
             generateAllTickets();
         }
 
-        // Generate 100 Tickets
         function generateAllTickets() {
             selectedTickets = [];
             const prefix = currentType === 'Premium' ? 'KLP' : 'KL';
@@ -427,9 +460,7 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // Initial load
         window.onload = generateAllTickets;
     </script>
-
 </body>
 </html>
