@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Number Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .ticket-box {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            background: #eef2f7;
+            padding: 15px;
+            border-radius: 6px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            border: 2px dashed #cbd5e1;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .whatsapp-btn {
+            background-color: #25d366;
+        }
+        .whatsapp-btn:hover {
+            background-color: #1ebe5d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Lucky Ticket Portal</h2>
+        
+        <!-- Ticket Number Display -->
+        <div class="ticket-box" id="ticketDisplay">KL ------</div>
+
+        <!-- Refresh Button -->
+        <button class="btn" onclick="generateTicket()">Refresh Ticket</button>
+
+        <!-- WhatsApp Share Button -->
+        <button class="btn whatsapp-btn" onclick="sendToWhatsApp()">Send to WhatsApp</button>
+    </div>
+
+    <script>
+        let currentTicket = "";
+
+        function generateTicket() {
+            // Random 6-digit number generate karega
+            const randomNum = Math.floor(100000 + Math.random() * 900000);
+            currentTicket = "KL " + randomNum;
+            
+            // Screen par show karega
+            document.getElementById('ticketDisplay').innerText = currentTicket;
+        }
+
+        function sendToWhatsApp() {
+            if (!currentTicket) {
+                alert("Pehle ticket generate karein!");
+                return;
+            }
+
+            const phoneNumber = "917061373557"; // Aapka WhatsApp number country code ke sath
+            const message = `Hello, meri selected ticket ID hai: ${currentTicket}`;
+            
+            // WhatsApp URL encode karke open karega
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Page load hote hi ek ticket generate ho jayega
+        window.onload = generateTicket;
+    </script>
+
+</body>
+</html>
