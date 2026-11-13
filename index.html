@@ -7,17 +7,20 @@
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #0f2027 100%);
-            margin: 0;
-            padding: 15px;
             color: #ffffff;
             min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            padding: 10px;
         }
 
-        /* Top Header Bar */
+        /* Top Header Bar - Full Width */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -25,9 +28,10 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             padding: 12px 20px;
-            border-radius: 12px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            width: 100%;
         }
         .logo-area {
             display: flex;
@@ -35,11 +39,10 @@
             gap: 12px;
         }
         .logo-icon {
-            font-size: 32px;
+            font-size: 28px;
         }
         .top-bar h2 {
-            margin: 0;
-            font-size: 20px;
+            font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #ffffff;
@@ -49,16 +52,13 @@
             color: #ffffff;
             border: none;
             padding: 8px 16px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-            transition: 0.2s;
         }
-        .top-offer-btn:hover {
-            background: #d97706;
-        }
+        .top-offer-btn:hover { background: #d97706; }
 
         /* Live Bar & Ticker */
         .info-bar {
@@ -66,10 +66,10 @@
             justify-content: space-between;
             align-items: center;
             background: rgba(0, 0, 0, 0.3);
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 8px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            margin-bottom: 10px;
+            width: 100%;
             gap: 10px;
         }
         .ticker-container {
@@ -80,7 +80,7 @@
         .ticker-text {
             display: inline-block;
             animation: marquee 15s linear infinite;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             color: #fde047;
         }
@@ -91,14 +91,15 @@
         .live-status-bar {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 13px;
+            gap: 6px;
+            font-size: 12px;
             font-weight: 700;
             color: #38bdf8;
+            white-space: nowrap;
         }
         .blink-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background-color: #ef4444;
             border-radius: 50%;
             display: inline-block;
@@ -110,78 +111,79 @@
             100% { opacity: 1; }
         }
 
-        /* Main Full-Width Layout Grid */
+        /* Main Full-Width Grid Layout (No Max-Width Restrictions) */
         .main-layout {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 20px;
+            grid-template-columns: 350px 1fr;
+            gap: 10px;
+            width: 100%;
         }
-        @media (max-width: 900px) {
+        @media (max-width: 800px) {
             .main-layout {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Panel Cards */
+        /* Panels */
         .panel {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 14px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 15px;
+            width: 100%;
         }
 
         /* Ticket Type Selection */
         .ticket-type-selector {
             display: flex;
-            gap: 12px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
         .type-card {
             flex: 1;
             border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 8px;
+            padding: 10px;
             text-align: center;
             cursor: pointer;
             background: rgba(255, 255, 255, 0.05);
-            transition: 0.2s;
         }
         .type-card.active {
             border-color: #38bdf8;
             background: rgba(56, 189, 248, 0.15);
         }
         .type-card h4 {
-            margin: 0 0 5px 0;
+            margin: 0 0 3px 0;
             color: #ffffff;
-            font-size: 15px;
+            font-size: 14px;
         }
         .type-card .price {
             color: #f87171;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         /* Featured Ticket Box */
         .ticket {
             background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             color: white;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 15px;
             text-align: center;
-            margin-bottom: 15px;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+            margin-bottom: 12px;
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
         }
         .ticket-number {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             letter-spacing: 2px;
             background: rgba(0, 0, 0, 0.25);
-            padding: 10px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 6px;
             display: inline-block;
             border: 1px dashed rgba(255, 255, 255, 0.5);
-            margin: 10px 0;
+            margin: 8px 0;
             word-break: break-all;
             color: #fef08a;
         }
@@ -191,14 +193,13 @@
             background-color: #f59e0b;
             color: white;
             border: none;
-            padding: 12px;
-            font-size: 15px;
-            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: bold;
-            transition: 0.2s;
         }
         .btn:hover { background-color: #d97706; }
         .whatsapp-btn {
@@ -209,41 +210,37 @@
 
         /* 100 Tickets Grid Section */
         .grid-section-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             color: #38bdf8;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .ticket-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 8px;
-            max-height: 380px;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 6px;
+            max-height: 420px;
             overflow-y: auto;
             background: rgba(0, 0, 0, 0.2);
-            padding: 12px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .grid-item {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid #cbd5e1;
-            padding: 8px 4px;
+            padding: 8px 2px;
             text-align: center;
             font-size: 12px;
             font-weight: bold;
             color: #0f172a;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: 0.15s;
         }
-        .grid-item:hover {
-            background: #ffffff;
-            transform: scale(1.02);
-        }
+        .grid-item:hover { background: #ffffff; }
         .grid-item.selected {
             background: #0284c7;
             color: white;
@@ -269,7 +266,7 @@
             width: 90%;
             max-width: 450px;
             padding: 20px;
-            border-radius: 14px;
+            border-radius: 12px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
@@ -287,11 +284,11 @@
         .prize-table {
             width: 100%;
             margin-top: 10px;
-            font-size: 13px;
+            font-size: 12px;
             border-collapse: collapse;
         }
         .prize-table th, .prize-table td {
-            padding: 6px 8px;
+            padding: 5px 6px;
             border-bottom: 1px solid rgba(255,255,255,0.15);
             text-align: left;
         }
@@ -324,7 +321,7 @@
     <div class="main-layout">
         <!-- Left Panel: Controls & Selected Ticket -->
         <div class="panel">
-            <h3 style="margin-top: 0; color: #38bdf8; font-size: 16px;">Select Category</h3>
+            <h3 style="margin-top: 0; color: #38bdf8; font-size: 15px; margin-bottom: 8px;">Select Category</h3>
             <div class="ticket-type-selector">
                 <div class="type-card active" id="normalCard" onclick="selectTicketType('Normal', 49)">
                     <h4>Normal</h4>
@@ -339,18 +336,18 @@
             <div class="ticket">
                 <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;" id="selectedCategoryTitle">NORMAL TICKET (₹49)</div>
                 <div class="ticket-number" id="ticketDisplay">No ticket selected</div>
-                <div style="font-size: 12px; opacity: 0.9;" id="selectionCount">Selected: 0 tickets</div>
+                <div style="font-size: 11px; opacity: 0.9;" id="selectionCount">Selected: 0 tickets</div>
             </div>
 
             <button class="btn" onclick="generateAllTickets()">Refresh All Tickets</button>
             <button class="btn whatsapp-btn" onclick="sendToWhatsApp()">Send Selected to WhatsApp</button>
         </div>
 
-        <!-- Right Panel: 100 Tickets Grid -->
+        <!-- Right Panel: 100 Tickets Grid (Spreads fully across remaining screen) -->
         <div class="panel">
             <div class="grid-section-title">
                 <span>Available Active Tickets (100)</span>
-                <span style="font-size: 12px; color: #38bdf8;">Tap multiple to select</span>
+                <span style="font-size: 11px; color: #38bdf8;">Tap multiple to select</span>
             </div>
             <div class="ticket-grid" id="ticketGridContainer">
                 <!-- Dynamic 100 tickets -->
@@ -362,11 +359,11 @@
     <div class="modal" id="offerModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h3 style="color: #60a5fa; text-align: center; margin-top: 0; font-size: 18px;">✨ Mega Bumper DHAMAKA OFFER ✨</h3>
-            <p style="text-align: center; color: #93c5fd; font-size: 14px; margin-bottom: 6px; font-weight: bold;">Dear Kerala Lottery Customer,</p>
-            <p style="text-align: center; color: #fbbf24; font-size: 15px; font-weight: bold; margin: 6px 0;">Golden chance to win ₹25 CRORE 💰</p>
+            <h3 style="color: #60a5fa; text-align: center; margin-top: 0; font-size: 16px;">✨ Mega Bumper DHAMAKA OFFER ✨</h3>
+            <p style="text-align: center; color: #93c5fd; font-size: 13px; margin-bottom: 4px; font-weight: bold;">Dear Kerala Lottery Customer,</p>
+            <p style="text-align: center; color: #fbbf24; font-size: 14px; font-weight: bold; margin: 4px 0;">Golden chance to win ₹25 CRORE 💰</p>
             
-            <div style="background: rgba(255,255,255,0.08); padding: 10px; border-radius: 8px; margin: 10px 0; font-size: 13px;">
+            <div style="background: rgba(255,255,255,0.08); padding: 8px; border-radius: 6px; margin: 8px 0; font-size: 12px;">
                 <strong>🚀 Kerala Jackpot Booking Available!</strong><br>
                 • 1 Ticket Price:- ₹149/-<br>
                 • 2 Ticket Price:- ₹298/-<br>
@@ -375,7 +372,7 @@
                 • 10 Ticket Price:- ₹1299/-
             </div>
 
-            <h4 style="color: #60a5fa; margin-bottom: 6px; text-align: center; font-size: 14px;">🏆 WINNING PRIZES 🏆</h4>
+            <h4 style="color: #60a5fa; margin-bottom: 4px; text-align: center; font-size: 13px;">🏆 WINNING PRIZES 🏆</h4>
             <table class="prize-table">
                 <tr><th>Rank</th><th>Prize</th><th>Winners</th></tr>
                 <tr><td>1st Prize</td><td>₹25 Crore</td><td>1 Person</td></tr>
@@ -389,7 +386,7 @@
                 <tr><td>9th Prize</td><td>₹10,000</td><td>179 Persons</td></tr>
             </table>
 
-            <div style="text-align: center; margin-top: 15px; font-size: 13px; color: #34d399; font-weight: bold;">
+            <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #34d399; font-weight: bold;">
                 Helpline Number: 7061373557
             </div>
         </div>
