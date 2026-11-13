@@ -3,52 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Number Generator</title>
+    <title>Kerala Official Ticket Booking Portal</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            text-align: center;
-            padding: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        .container {
+        .portal-container {
             background: #ffffff;
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         h2 {
-            color: #333;
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        /* Ticket Type Selection */
+        .ticket-type-selector {
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
         }
-        .ticket-box {
-            font-size: 28px;
-            font-weight: bold;
-            color: #2c3e50;
-            background: #eef2f7;
-            padding: 15px;
-            border-radius: 6px;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            border: 2px dashed #cbd5e1;
+        .type-card {
+            flex: 1;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
         }
+        .type-card.active {
+            border-color: #2a5298;
+            background: #eef2f7;
+        }
+        .type-card h4 {
+            margin: 0 0 5px 0;
+            color: #333;
+            font-size: 15px;
+        }
+        .type-card .price {
+            color: #d9534f;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        /* Ticket Look Design */
+        .ticket {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 6px 15px rgba(30, 60, 114, 0.3);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .ticket::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        .ticket-body {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .ticket-number {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 1px dashed rgba(255, 255, 255, 0.4);
+        }
+        .ticket-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        /* Buttons */
         .btn {
-            background-color: #007bff;
+            background-color: #ff9800;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 12px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: bold;
+            transition: background 0.2s;
         }
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #f57c00;
         }
         .whatsapp-btn {
             background-color: #25d366;
@@ -60,46 +138,89 @@
 </head>
 <body>
 
-    <div class="container">
-        <h2>Lucky Ticket Portal</h2>
-        
-        <!-- Ticket Number Display -->
-        <div class="ticket-box" id="ticketDisplay">KL ------</div>
+    <div class="portal-container">
+        <h2>Kerala Ticket Booking</h2>
 
-        <!-- Refresh Button -->
-        <button class="btn" onclick="generateTicket()">Refresh Ticket</button>
+        <!-- Ticket Category Cards -->
+        <div class="ticket-type-selector">
+            <div class="type-card active" id="normalCard" onclick="selectTicketType('Normal', 49)">
+                <h4>Normal</h4>
+                <div class="price">Rs/49</div>
+            </div>
+            <div class="type-card" id="premiumCard" onclick="selectTicketType('Premium', 149)">
+                <h4>Premium</h4>
+                <div class="price">Rs/149</div>
+            </div>
+        </div>
 
-        <!-- WhatsApp Share Button -->
+        <!-- Realistic Ticket Visual Box -->
+        <div class="ticket">
+            <div class="ticket-header">
+                <span id="selectedCategoryTitle">NORMAL TICKET</span>
+                <span id="ticketPriceTag">Rs/49</span>
+            </div>
+            <div class="ticket-body">
+                <div style="font-size: 12px; margin-bottom: 5px; opacity: 0.9;">TICKET SERIAL NUMBER</div>
+                <div class="ticket-number" id="ticketDisplay">KL ------</div>
+            </div>
+            <div class="ticket-footer">
+                <span>Official Portal</span>
+                <span id="statusBadge">Active</span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <button class="btn" onclick="generateTicket()">Refresh Ticket Number</button>
         <button class="btn whatsapp-btn" onclick="sendToWhatsApp()">Send to WhatsApp</button>
     </div>
 
     <script>
-        let currentTicket = "";
+        let currentType = "Normal";
+        let currentPrice = 49;
+        let currentTicketNumber = "";
+
+        function selectTicketType(type, price) {
+            currentType = type;
+            currentPrice = price;
+
+            // UI active class switch karna
+            if(type === 'Normal') {
+                document.getElementById('normalCard').classList.add('active');
+                document.getElementById('premiumCard').classList.remove('active');
+                document.getElementById('selectedCategoryTitle').innerText = "NORMAL TICKET";
+            } else {
+                document.getElementById('premiumCard').classList.add('active');
+                document.getElementById('normalCard').classList.remove('active');
+                document.getElementById('selectedCategoryTitle').innerText = "PREMIUM TICKET";
+            }
+
+            document.getElementById('ticketPriceTag').innerText = "Rs/" + price;
+            generateTicket(); // Naya category select hone par number bhi refresh hoga
+        }
 
         function generateTicket() {
-            // Random 6-digit number generate karega
             const randomNum = Math.floor(100000 + Math.random() * 900000);
-            currentTicket = "KL " + randomNum;
+            // Prefix change kar sakte hain premium ke liye alag style me
+            const prefix = currentType === 'Premium' ? 'KLP' : 'KL';
+            currentTicketNumber = `${prefix} ${randomNum}`;
             
-            // Screen par show karega
-            document.getElementById('ticketDisplay').innerText = currentTicket;
+            document.getElementById('ticketDisplay').innerText = currentTicketNumber;
         }
 
         function sendToWhatsApp() {
-            if (!currentTicket) {
+            if (!currentTicketNumber) {
                 alert("Pehle ticket generate karein!");
                 return;
             }
 
-            const phoneNumber = "917061373557"; // Aapka WhatsApp number country code ke sath
-            const message = `Hello, meri selected ticket ID hai: ${currentTicket}`;
+            const phoneNumber = "917061373557"; // Aapka number
+            const message = `Hello, maine ${currentType} Ticket (${currentPrice} Rs) select kiya hai. Meri Ticket ID hai: ${currentTicketNumber}`;
             
-            // WhatsApp URL encode karke open karega
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
-        // Page load hote hi ek ticket generate ho jayega
+        // Page load hone par pehla ticket generate ho jaye
         window.onload = generateTicket;
     </script>
 
