@@ -10,15 +10,37 @@
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             margin: 0;
             padding: 15px;
-            color: #333;
+            color: #1e293b;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
+        /* Top Right Offer Button */
+        .top-offer-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #1e3a8a;
+            color: #ffffff;
+            border: 2px solid #60a5fa;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: 0.2s;
+            z-index: 10;
+        }
+        .top-offer-btn:hover {
+            background: #1d4ed8;
+        }
+
         .portal-container {
             background: #ffffff;
-            color: #333;
+            color: #1e293b;
             width: 100%;
             max-width: 500px;
             padding: 20px;
@@ -35,7 +57,7 @@
             margin-bottom: 5px;
         }
         .header h2 {
-            color: #007bff;
+            color: #1d4ed8;
             margin: 0;
             font-size: 20px;
             text-transform: uppercase;
@@ -80,12 +102,12 @@
         }
         /* Main Featured Ticket Box */
         .ticket {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
             color: white;
             border-radius: 12px;
             padding: 15px;
             position: relative;
-            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 6px 15px rgba(30, 58, 138, 0.3);
             margin-bottom: 15px;
             text-align: center;
         }
@@ -166,9 +188,71 @@
         .whatsapp-btn:hover {
             background-color: #059669;
         }
+
+        /* Popup Modal Styling (Blue & Dark Theme) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #f8fafc;
+            width: 90%;
+            max-width: 420px;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid #3b82f6;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #93c5fd;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #ffffff;
+        }
+        .modal-content h3 {
+            color: #60a5fa;
+            text-align: center;
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .prize-table {
+            width: 100%;
+            margin-top: 10px;
+            font-size: 13px;
+            border-collapse: collapse;
+        }
+        .prize-table th, .prize-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            text-align: left;
+        }
+        .prize-table th {
+            color: #93c5fd;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Top Right Offer Button -->
+    <button class="top-offer-btn" onclick="openModal()">🔥 Mega Offer & Prizes</button>
 
     <div class="portal-container">
         <!-- Header & Logo -->
@@ -211,10 +295,55 @@
         <button class="btn whatsapp-btn" onclick="sendToWhatsApp()">Send Selected to WhatsApp (7061373557)</button>
     </div>
 
+    <!-- Modal Popup for Mega Offer & Prizes -->
+    <div class="modal" id="offerModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3>✨ Mega Bumper DHAMAKA OFFER ✨</h3>
+            <p style="text-align: center; color: #93c5fd; font-size: 14px; margin-bottom: 5px; font-weight: bold;">Dear Kerala Lottery Customer,</p>
+            <p style="text-align: center; color: #fbbf24; font-size: 15px; font-weight: bold; margin: 5px 0;">Golden chance to win ₹25 CRORE 💰</p>
+            
+            <div style="background: rgba(255,255,255,0.08); padding: 10px; border-radius: 8px; margin: 10px 0; font-size: 13px;">
+                <strong>🚀 Kerala Jackpot Booking Available!</strong><br>
+                • 1 Ticket Price:- ₹149/-<br>
+                • 2 Ticket Price:- ₹298/-<br>
+                • 3 Ticket Price:- ₹399/-<br>
+                • 5 Ticket Price:- ₹596/-<br>
+                • 10 Ticket Price:- ₹1299/-
+            </div>
+
+            <h4 style="color: #60a5fa; margin-bottom: 5px; text-align: center;">🏆 WINNING PRIZES 🏆</h4>
+            <table class="prize-table">
+                <tr><th>Rank</th><th>Prize</th><th>Winners</th></tr>
+                <tr><td>1st Prize</td><td>₹25 Crore</td><td>1 Person</td></tr>
+                <tr><td>2nd Prize</td><td>₹12 Crore</td><td>1 Person</td></tr>
+                <tr><td>3rd Prize</td><td>₹75 Lakh</td><td>1 Person</td></tr>
+                <tr><td>4th Prize</td><td>₹25 Lakh</td><td>12 Persons</td></tr>
+                <tr><td>5th Prize</td><td>₹12 Lakh</td><td>36 Persons</td></tr>
+                <tr><td>6th Prize</td><td>₹1 Lakh</td><td>40 Persons</td></tr>
+                <tr><td>7th Prize</td><td>₹75,000</td><td>99 Persons</td></tr>
+                <tr><td>8th Prize</td><td>₹25,000</td><td>120 Persons</td></tr>
+                <tr><td>9th Prize</td><td>₹10,000</td><td>179 Persons</td></tr>
+            </table>
+
+            <div style="text-align: center; margin-top: 15px; font-size: 13px; color: #34d399; font-weight: bold;">
+                Helpline Number: 7061373557
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentType = "Normal";
         let currentPrice = 49;
         let selectedTickets = [];
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('offerModal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('offerModal').style.display = 'none';
+        }
 
         // Real-time Date & Time Function
         function updateDateTime() {
@@ -228,7 +357,7 @@
         function selectTicketType(type, price) {
             currentType = type;
             currentPrice = price;
-            selectedTickets = []; // Category change par reset
+            selectedTickets = []; 
 
             if(type === 'Normal') {
                 document.getElementById('normalCard').classList.add('active');
@@ -265,11 +394,9 @@
         function toggleTicketSelection(ticketStr, element) {
             const index = selectedTickets.indexOf(ticketStr);
             if (index > -1) {
-                // Agar pehle se selected hai toh hata do
                 selectedTickets.splice(index, 1);
                 element.classList.remove('selected');
             } else {
-                // Naya select kar lo (Multiple allowed)
                 selectedTickets.push(ticketStr);
                 element.classList.add('selected');
             }
