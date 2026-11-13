@@ -7,39 +7,57 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
+            color: #fff;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
         }
         .portal-container {
             background: #ffffff;
+            color: #333;
             width: 100%;
-            max-width: 420px;
-            padding: 25px;
+            max-width: 500px;
+            padding: 20px;
             border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
-        h2 {
+        /* Header & Logo */
+        .header {
             text-align: center;
+            margin-bottom: 15px;
+        }
+        .logo-icon {
+            font-size: 36px;
+            margin-bottom: 5px;
+        }
+        .header h2 {
             color: #1e3c72;
-            margin-bottom: 20px;
-            font-size: 22px;
+            margin: 0;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .datetime {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-weight: 600;
         }
         /* Ticket Type Selection */
         .ticket-type-selector {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .type-card {
             flex: 1;
             border: 2px solid #ddd;
             border-radius: 10px;
-            padding: 12px;
+            padding: 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -50,78 +68,90 @@
             background: #eef2f7;
         }
         .type-card h4 {
-            margin: 0 0 5px 0;
+            margin: 0 0 3px 0;
             color: #333;
-            font-size: 15px;
+            font-size: 14px;
         }
         .type-card .price {
             color: #d9534f;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
         }
-        /* Ticket Look Design */
+        /* Main Featured Ticket Box */
         .ticket {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             border-radius: 12px;
-            padding: 20px;
+            padding: 15px;
             position: relative;
             box-shadow: 0 6px 15px rgba(30, 60, 114, 0.3);
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        .ticket::before {
-            content: "";
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-        .ticket-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.8;
-            margin-bottom: 10px;
-        }
-        .ticket-body {
+            margin-bottom: 15px;
             text-align: center;
-            margin: 15px 0;
         }
         .ticket-number {
-            font-size: 32px;
+            font-size: 26px;
             font-weight: bold;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             background: rgba(0, 0, 0, 0.2);
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
             display: inline-block;
             border: 1px dashed rgba(255, 255, 255, 0.4);
+            margin: 8px 0;
         }
-        .ticket-footer {
+        /* 100 Tickets Grid Section */
+        .grid-section-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 10px;
-            margin-top: 10px;
+            align-items: center;
+        }
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            max-height: 160px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+        .grid-item {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            padding: 6px 4px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: bold;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .grid-item:hover {
+            background: #e2e8f0;
+        }
+        .grid-item.selected {
+            background: #2a5298;
+            color: white;
+            border-color: #1e3c72;
         }
         /* Buttons */
         .btn {
             background-color: #ff9800;
             color: white;
             border: none;
-            padding: 12px;
-            font-size: 16px;
+            padding: 10px;
+            font-size: 15px;
             border-radius: 8px;
             cursor: pointer;
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: bold;
             transition: background 0.2s;
         }
@@ -139,89 +169,128 @@
 <body>
 
     <div class="portal-container">
-        <h2>Kerala Ticket Booking</h2>
+        <!-- Header & Logo -->
+        <div class="header">
+            <div class="logo-icon">🎟️</div>
+            <h2>Welcome to Kerala Lottery Tickets</h2>
+            <div class="datetime" id="liveDateTime">Loading Date & Time...</div>
+        </div>
 
         <!-- Ticket Category Cards -->
         <div class="ticket-type-selector">
             <div class="type-card active" id="normalCard" onclick="selectTicketType('Normal', 49)">
-                <h4>Normal</h4>
+                <h4>Normal Ticket</h4>
                 <div class="price">Rs/49</div>
             </div>
             <div class="type-card" id="premiumCard" onclick="selectTicketType('Premium', 149)">
-                <h4>Premium</h4>
+                <h4>Premium Ticket</h4>
                 <div class="price">Rs/149</div>
             </div>
         </div>
 
-        <!-- Realistic Ticket Visual Box -->
+        <!-- Featured Selected Ticket Box -->
         <div class="ticket">
-            <div class="ticket-header">
-                <span id="selectedCategoryTitle">NORMAL TICKET</span>
-                <span id="ticketPriceTag">Rs/49</span>
-            </div>
-            <div class="ticket-body">
-                <div style="font-size: 12px; margin-bottom: 5px; opacity: 0.9;">TICKET SERIAL NUMBER</div>
-                <div class="ticket-number" id="ticketDisplay">KL ------</div>
-            </div>
-            <div class="ticket-footer">
-                <span>Official Portal</span>
-                <span id="statusBadge">Active</span>
-            </div>
+            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;" id="selectedCategoryTitle">NORMAL TICKET (Rs/49)</div>
+            <div class="ticket-number" id="ticketDisplay">KL ------</div>
+            <div style="font-size: 11px; opacity: 0.9;">Click any ticket from below or refresh for new numbers</div>
+        </div>
+
+        <!-- 100 Tickets Grid View -->
+        <div class="grid-section-title">
+            <span>Available Active Tickets (100)</span>
+            <span style="font-size: 11px; color: #666;">Tap to Select</span>
+        </div>
+        <div class="ticket-grid" id="ticketGridContainer">
+            <!-- Dynamic 100 tickets will load here -->
         </div>
 
         <!-- Action Buttons -->
-        <button class="btn" onclick="generateTicket()">Refresh Ticket Number</button>
-        <button class="btn whatsapp-btn" onclick="sendToWhatsApp()">Send to WhatsApp</button>
+        <button class="btn" onclick="generateAllTickets()">Refresh All Tickets</button>
+        <button class="btn whatsapp-btn" onclick="sendToWhatsApp()">Send Selected to WhatsApp</button>
     </div>
 
     <script>
         let currentType = "Normal";
         let currentPrice = 49;
-        let currentTicketNumber = "";
+        let selectedTicketNumber = "";
+        let ticketsList = [];
+
+        // Real-time Date & Time Function
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('liveDateTime').innerText = now.toLocaleDateString('en-IN', options);
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
 
         function selectTicketType(type, price) {
             currentType = type;
             currentPrice = price;
 
-            // UI active class switch karna
             if(type === 'Normal') {
                 document.getElementById('normalCard').classList.add('active');
                 document.getElementById('premiumCard').classList.remove('active');
-                document.getElementById('selectedCategoryTitle').innerText = "NORMAL TICKET";
+                document.getElementById('selectedCategoryTitle').innerText = "NORMAL TICKET (Rs/49)";
             } else {
                 document.getElementById('premiumCard').classList.add('active');
                 document.getElementById('normalCard').classList.remove('active');
-                document.getElementById('selectedCategoryTitle').innerText = "PREMIUM TICKET";
+                document.getElementById('selectedCategoryTitle').innerText = "PREMIUM TICKET (Rs/149)";
             }
-
-            document.getElementById('ticketPriceTag').innerText = "Rs/" + price;
-            generateTicket(); // Naya category select hone par number bhi refresh hoga
+            generateAllTickets();
         }
 
-        function generateTicket() {
-            const randomNum = Math.floor(100000 + Math.random() * 900000);
-            // Prefix change kar sakte hain premium ke liye alag style me
+        // Generate 100 Tickets
+        function generateAllTickets() {
+            ticketsList = [];
             const prefix = currentType === 'Premium' ? 'KLP' : 'KL';
-            currentTicketNumber = `${prefix} ${randomNum}`;
-            
-            document.getElementById('ticketDisplay').innerText = currentTicketNumber;
+            const gridContainer = document.getElementById('ticketGridContainer');
+            gridContainer.innerHTML = '';
+
+            for (let i = 0; i < 100; i++) {
+                const randomNum = Math.floor(100000 + Math.random() * 900000);
+                const ticketStr = `${prefix} ${randomNum}`;
+                ticketsList.push(ticketStr);
+
+                const item = document.createElement('div');
+                item.className = 'grid-item';
+                item.innerText = ticketStr;
+                item.onclick = () => selectTicketFromGrid(ticketStr, item);
+                gridContainer.appendChild(item);
+            }
+
+            // Automatically select the first ticket by default
+            if (ticketsList.length > 0) {
+                selectTicketFromGrid(ticketsList[0], gridContainer.firstChild);
+            }
+        }
+
+        function selectTicketFromGrid(ticketStr, elementElement) {
+            selectedTicketNumber = ticketStr;
+            document.getElementById('ticketDisplay').innerText = selectedTicketNumber;
+
+            // Highlight selected item in grid
+            document.querySelectorAll('.grid-item').forEach(el => el.classList.remove('selected'));
+            if(elementElement) {
+                elementElement.classList.add('selected');
+            }
         }
 
         function sendToWhatsApp() {
-            if (!currentTicketNumber) {
-                alert("Pehle ticket generate karein!");
+            if (!selectedTicketNumber) {
+                alert("Pehle ticket select karein!");
                 return;
             }
 
-            const phoneNumber = "917061373557"; // Aapka number
-            const message = `Hello, maine ${currentType} Ticket (${currentPrice} Rs) select kiya hai. Meri Ticket ID hai: ${currentTicketNumber}`;
+            const phoneNumber = "917061373557"; 
+            const message = `Hello, maine ${currentType} Ticket (${currentPrice} Rs) select kiya hai. Meri Ticket ID hai: ${selectedTicketNumber}`;
             
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
-        // Page load hone par pehla ticket generate ho jaye
-        window.onload = generateTicket;
+        // Initial load
+        window.onload = generateAllTickets;
     </script>
 
 </body>
