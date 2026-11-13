@@ -14,11 +14,10 @@
             margin: 0;
             padding: 10px;
             color: #1e293b;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             position: relative;
         }
         /* Top Right Offer Button */
@@ -49,7 +48,6 @@
             padding: 15px;
             border-radius: 14px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            max-height: 98vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -188,7 +186,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 4px;
-            max-height: 120px;
+            max-height: 150px;
             overflow-y: auto;
             background: #f0f9ff;
             padding: 6px;
@@ -199,7 +197,7 @@
         .grid-item {
             background: #ffffff;
             border: 1px solid #7dd3fc;
-            padding: 5px 2px;
+            padding: 6px 2px;
             text-align: center;
             font-size: 11px;
             font-weight: bold;
@@ -218,12 +216,12 @@
             background-color: #f59e0b;
             color: white;
             border: none;
-            padding: 8px;
+            padding: 9px;
             font-size: 13px;
             border-radius: 6px;
             cursor: pointer;
             width: 100%;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-weight: bold;
         }
         .whatsapp-btn {
@@ -332,7 +330,7 @@
 
         <!-- Action Buttons -->
         <button class="btn" onclick="generateAllTickets()">Refresh All Tickets</button>
-        <button class="btn whatsapp-btn" onclick="sendToWhatsApp()">Send Selected to WhatsApp (7061373557)</button>
+        <button class="btn whatsapp-btn" onclick="sendToWhatsApp()">Send Selected to WhatsApp</button>
     </div>
 
     <!-- Modal Popup for Mega Offer & Prizes -->
